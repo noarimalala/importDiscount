@@ -38,36 +38,38 @@ class Import extends AbstractHelper
         $rootMedia = $this->_dir->getPath('media');
         $contentFolder = $rootMedia."/importFileCSV/";
         $files = glob($contentFolder."*.csv");
-        foreach( $files as $f) {
-            $row=0;
-            $file = fopen($f, "r");
-            if($file) {
-                while (($data = fgetcsv($file,1000,";")) !== FALSE) { // read row file csv
-                    if ($row > 0) {
-                        list($name, $discount, $code) = $data;
-                         $coupon = $this->getDiscountCode($code);
-                        if(!$coupon->getRuleId()) {
-                        $newRule = $this->rule->create();
-                        $newRule->setName($name)
-                            ->setIsAdvanced(true)
-                            ->setStopRulesProcessing(false)
-                            ->setCustomerGroupIds([0, 1, 2]) // customer groups id to apply discount
-                            ->setWebsiteIds([1]) //website id
-                            ->setCouponType(RuleInterface::COUPON_TYPE_SPECIFIC_COUPON)
-                            ->setSimpleAction(RuleInterface::DISCOUNT_ACTION_BY_PERCENT)
-                            ->setDiscountAmount($discount)
-                            ->setIsActive(true); // enable coupon
-                            $ruleCreate = $this->ruleRepository->save($newRule);
-                        if ($ruleCreate->getRuleId()) {
-                            $this->createCoupon($ruleCreate->getRuleId(), $code);
+        if($files) { // check if directory contains files
+            foreach ($files as $f) {
+                $row = 0;
+                $file = fopen($f, "r");
+                if ($file) {
+                    while (($data = fgetcsv($file, 1000, ";")) !== FALSE) { // read row file csv
+                        if ($row > 0) {
+                            list($name, $discount, $code) = $data;
+                            $coupon = $this->getDiscountCode($code);
+                            if (!$coupon->getRuleId()) {
+                                $newRule = $this->rule->create();
+                                $newRule->setName($name)
+                                    ->setIsAdvanced(true)
+                                    ->setStopRulesProcessing(false)
+                                    ->setCustomerGroupIds([0, 1, 2]) // customer groups id to apply discount
+                                    ->setWebsiteIds([1]) //website id
+                                    ->setCouponType(RuleInterface::COUPON_TYPE_SPECIFIC_COUPON)
+                                    ->setSimpleAction(RuleInterface::DISCOUNT_ACTION_BY_PERCENT)
+                                    ->setDiscountAmount($discount)
+                                    ->setIsActive(true); // enable coupon
+                                $ruleCreate = $this->ruleRepository->save($newRule);
+                                if ($ruleCreate->getRuleId()) {
+                                    $this->createCoupon($ruleCreate->getRuleId(), $code);
+                                }
+                            }
                         }
+                        $row++;
                     }
                 }
-                    $row++;
-                }
+                fclose($file);
+                $this->moveImportedFile($rootMedia, $f); //move file after imported file
             }
-            fclose($file);
-            $this->moveImportedFile($rootMedia,$f); //move file after imported file
         }
     }
 
