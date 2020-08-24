@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="cron_kaliop">
+        <job name="custom_job_name" instance="Kaliop\ImportDiscount\Cron\ImportDiscount" method="execute">
+            <config_path>kaliopcron/general/cron_input</config_path>
+        </job>
+    </group>
+</config>

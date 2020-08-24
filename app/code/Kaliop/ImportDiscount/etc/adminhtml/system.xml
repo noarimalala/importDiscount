@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="kaliop" translate="label" sortOrder="10">
+            <label>Kaliop</label>
+        </tab>
+        <section id="kaliopcron" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Cron Configuration</label>
+            <tab>kaliop</tab>
+            <resource>Kaliop_ImportDiscount::kaliopcron_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cron Job</label>
+               
+                <field id="cron_input" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron config : </label>
+                </field>
+            </group>
+        </section>
+		<section id="kaliopimport" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Import Coupon code csv file</label>
+            <tab>kaliop</tab>
+            <resource>Kaliop_ImportDiscount::kaliopimport_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Import Discount csv file</label>
+                <field id="coupon_csv_file" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Import csv file</label>
+					<backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
+					<upload_dir config="system" scope_info="0">importFileCSV</upload_dir>
+			    </field>
+            </group>
+        </section>
+    </system>
+</config>
