@@ -28,7 +28,7 @@ php -d memory_limit=-1 bin/magento setup:static-content:deploy -f
  login: Kaliop / pwd: 123Admin456#
  - Pour tester l'import de fichiers csv et l'exécution du cron, accédez dans Store>configuration, puis: 
  - config cron, 
- ouvrez la section KALIOP et cliquez sur Cron configutaion, saisissez le "expression cron" et sauvegardez
+ ouvrez la section KALIOP et cliquez sur Cron configutaion, saisissez le "expression cron" et sauvegardez ; 
  ouvrez aussi ADVANCED>System>Cron configuration options for group: cron_kaliop et
  configurez le cron group selon vos besoins et sauvegardez
 - import fichier csv,
