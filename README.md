@@ -25,14 +25,13 @@ php -d memory_limit=-1 bin/magento setup:di:compile
 php -d memory_limit=-1 bin/magento setup:static-content:deploy -f
 
 - accédez dans l'url bo avec le login suivant:
- login: Kaliop
- pwd: 123Admin456#
- Pour tester l'import de fichiers csv et l'exécution du cron, accédez dans Store>configuration, puis: 
- - config cron
- Ouvrez la section KALIOP et cliquez sur Cron configutaion, saisissez le "expression cron" et sauvegardez
- Ouvrez aussi ADVANCED>System>Cron configuration options for group: cron_kaliop et
+ login: Kaliop / pwd: 123Admin456#
+ - Pour tester l'import de fichiers csv et l'exécution du cron, accédez dans Store>configuration, puis: 
+ - config cron, 
+ ouvrez la section KALIOP et cliquez sur Cron configutaion, saisissez le "expression cron" et sauvegardez
+ ouvrez aussi ADVANCED>System>Cron configuration options for group: cron_kaliop et
  configurez le cron group selon vos besoins et sauvegardez
-- import fichier csv
+- import fichier csv,
  cliquez sur Import coupon code csv file, importez les fichiers csv et sauvegardez
 
 - lancez la commande suivante pour tester l'enregistrement des coupons à l'intérieur de fichiers importés
